@@ -96,6 +96,9 @@ const sliceIntoChunks = (arr, chunkSize) => {
     return res;
 }
 
+
+// MAIN PROCESS
+
 (async function main() {
     console.log(`Starting web scrapper.`)
 
