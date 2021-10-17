@@ -13,6 +13,7 @@ const failedUrls = [];
 
 // UTIL FUNCTIONS
 
+// Find list of archives with nested links to them inside <a> tag. 
 const findAvailableArchives = () => axios.get(BASE_URL).then(res => {
     const $ = cheerio.load(res.data);
     const archives = [];
@@ -22,6 +23,7 @@ const findAvailableArchives = () => axios.get(BASE_URL).then(res => {
     return archives;
 })
 
+// Get actual table row from table, scrape data and prepapare for saving as actual record in csv file.
 const scrapeTable = html => {
     const rows = [];
 
@@ -60,6 +62,7 @@ const fetchData = async url => {
     return response;
 }
 
+// Scrape all tables from give urls.
 const scrapeTables = async urls => {
     console.log(`Scrape and destructure data for ${urls.length} urls.`)
 
@@ -87,6 +90,7 @@ const writeToCsv = (rows, filename) => {
     console.log(`Written ${rows.length} rows to ${file}`)
 }
 
+// Urls array is too large and can respond with HTTP 502 so you need to split in into smaller chunks 
 const sliceIntoChunks = (arr, chunkSize) => {
     const res = [];
     for (let i = 0; i < arr.length; i += chunkSize) {
